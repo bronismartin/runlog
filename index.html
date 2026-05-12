@@ -20,14 +20,11 @@
             --green-muted: rgba(62, 207, 113, 0.15);
             --blue: #4A9EF5;
             --blue-muted: rgba(74, 158, 245, 0.12);
-            --yellow: #F5C542;
             --radius: 12px;
             --font-display: 'Playfair Display', Georgia, serif;
             --font-body: 'DM Sans', -apple-system, sans-serif;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: var(--font-body);
             background: var(--bg);
@@ -35,8 +32,6 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
-
-        /* ─── Grain overlay ─── */
         body::before {
             content: '';
             position: fixed;
@@ -45,29 +40,60 @@
             pointer-events: none;
             z-index: 9999;
         }
-
-        /* ─── Hero header ─── */
+        .login-bar {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.7rem;
+        }
+        .login-bar input {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.45rem 0.8rem;
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            width: 200px;
+            outline: none;
+        }
+        .login-bar input:focus { border-color: var(--accent); }
+        .login-bar button {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.45rem 1rem;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .login-bar .user-info { font-size: 0.85rem; color: var(--text-muted); }
+        .login-bar .user-info strong { color: var(--accent); }
+        .btn-logout {
+            background: var(--surface) !important;
+            border: 1px solid var(--border) !important;
+            color: var(--text-muted) !important;
+            font-weight: 400 !important;
+        }
         .hero {
-            padding: 3rem 2rem 2rem;
+            padding: 2rem 2rem 2rem;
             position: relative;
             overflow: hidden;
         }
         .hero::after {
             content: '';
             position: absolute;
-            top: -120px;
-            right: -80px;
-            width: 350px;
-            height: 350px;
+            top: -120px; right: -80px;
+            width: 350px; height: 350px;
             background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
             pointer-events: none;
         }
-        .hero-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
+        .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
         .hero h1 {
             font-family: var(--font-display);
             font-weight: 900;
@@ -75,17 +101,20 @@
             letter-spacing: -0.02em;
             line-height: 1.05;
         }
-        .hero h1 span {
-            color: var(--accent);
+        .hero h1 span { color: var(--accent); }
+        .hero .tagline { color: var(--text-muted); font-size: 1.05rem; margin-top: 0.6rem; }
+        .status-bar { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+        .status-msg {
+            background: var(--blue-muted);
+            color: var(--blue);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            text-align: center;
+            display: none;
         }
-        .hero .tagline {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-top: 0.6rem;
-            font-weight: 400;
-        }
-
-        /* ─── Stats row ─── */
+        .status-msg.error { background: rgba(232,64,64,0.12); color: #E84040; }
+        .status-msg.visible { display: block; }
         .stats-row {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -99,42 +128,16 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 1.2rem 1.4rem;
-            position: relative;
-            overflow: hidden;
             transition: border-color 0.3s;
         }
         .stat-card:hover { border-color: var(--accent); }
-        .stat-card .label {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            margin-bottom: 0.35rem;
-        }
-        .stat-card .value {
-            font-family: var(--font-display);
-            font-size: 1.9rem;
-            font-weight: 700;
-            line-height: 1.1;
-        }
-        .stat-card .unit {
-            font-family: var(--font-body);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-weight: 400;
-        }
+        .stat-card .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 0.35rem; }
+        .stat-card .value { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; line-height: 1.1; }
+        .stat-card .unit { font-family: var(--font-body); font-size: 0.8rem; color: var(--text-muted); font-weight: 400; }
         .stat-card.accent .value { color: var(--accent); }
         .stat-card.green .value { color: var(--green); }
         .stat-card.blue .value { color: var(--blue); }
-
-        /* ─── Main content ─── */
-        .main {
-            max-width: 900px;
-            margin: 2.5rem auto 4rem;
-            padding: 0 2rem;
-        }
-
-        /* ─── Form ─── */
+        .main { max-width: 900px; margin: 2.5rem auto 4rem; padding: 0 2rem; }
         .form-section {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -142,25 +145,9 @@
             padding: 1.8rem;
             margin-bottom: 2.5rem;
         }
-        .form-title {
-            font-family: var(--font-display);
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-        }
-        .field label {
-            display: block;
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-muted);
-            margin-bottom: 0.4rem;
-        }
+        .form-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; margin-bottom: 1.2rem; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+        .field label { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.4rem; }
         .field input, .field select, .field textarea {
             width: 100%;
             background: var(--bg);
@@ -173,13 +160,9 @@
             transition: border-color 0.2s, box-shadow 0.2s;
             outline: none;
         }
-        .field input:focus, .field select:focus, .field textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
+        .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
         .field textarea { resize: vertical; min-height: 60px; }
         .field-wide { grid-column: 1 / -1; }
-
         .btn-add {
             margin-top: 1.2rem;
             background: var(--accent);
@@ -193,46 +176,15 @@
             cursor: pointer;
             transition: transform 0.15s, box-shadow 0.2s;
         }
-        .btn-add:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 24px var(--accent-glow);
-        }
+        .btn-add:hover { transform: translateY(-1px); box-shadow: 0 6px 24px var(--accent-glow); }
         .btn-add:active { transform: translateY(0); }
-
-        /* ─── Table ─── */
-        .list-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-        }
-        .list-title {
-            font-family: var(--font-display);
-            font-size: 1.35rem;
-            font-weight: 700;
-        }
-        .filter-pills {
-            display: flex;
-            gap: 0.4rem;
-        }
-        .pill {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 0.3rem 0.85rem;
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .pill.active, .pill:hover {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-        }
-
+        .btn-add:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .list-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+        .list-title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; }
+        .filter-pills { display: flex; gap: 0.4rem; }
+        .pill { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.3rem 0.85rem; font-size: 0.78rem; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+        .pill.active, .pill:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
         .run-list { display: flex; flex-direction: column; gap: 0.65rem; }
-
         .run-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -245,91 +197,27 @@
             transition: border-color 0.2s, transform 0.15s;
             animation: slideIn 0.35s ease-out both;
         }
-        .run-card:hover {
-            border-color: var(--accent);
-            transform: translateX(4px);
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .run-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem 1.2rem;
-            align-items: baseline;
-        }
-        .run-date {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            min-width: 90px;
-        }
-        .run-distance {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
+        .run-card:hover { border-color: var(--accent); transform: translateX(4px); }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .run-meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; align-items: baseline; }
+        .run-date { font-size: 0.78rem; color: var(--text-muted); min-width: 90px; }
+        .run-distance { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--accent); }
         .run-distance .km { font-family: var(--font-body); font-size: 0.75rem; color: var(--text-muted); font-weight: 400; }
-        .run-time {
-            font-size: 0.92rem;
-            color: var(--blue);
-            font-weight: 500;
-        }
-        .run-pace {
-            font-size: 0.82rem;
-            color: var(--green);
-            background: var(--green-muted);
-            padding: 0.15rem 0.55rem;
-            border-radius: 6px;
-        }
-        .run-note {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            grid-column: 1 / -1;
-            font-style: italic;
-        }
-        .run-actions {
-            display: flex;
-            gap: 0.3rem;
-        }
-        .btn-icon {
-            background: none;
-            border: 1px solid transparent;
-            border-radius: 6px;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 0.35rem;
-            font-size: 1rem;
-            transition: all 0.2s;
-            line-height: 1;
-        }
+        .run-time { font-size: 0.92rem; color: var(--blue); font-weight: 500; }
+        .run-pace { font-size: 0.82rem; color: var(--green); background: var(--green-muted); padding: 0.15rem 0.55rem; border-radius: 6px; }
+        .run-note { font-size: 0.82rem; color: var(--text-muted); grid-column: 1 / -1; font-style: italic; }
+        .run-actions { display: flex; gap: 0.3rem; }
+        .btn-icon { background: none; border: 1px solid transparent; border-radius: 6px; color: var(--text-muted); cursor: pointer; padding: 0.35rem; font-size: 1rem; transition: all 0.2s; line-height: 1; }
         .btn-icon:hover { color: var(--accent); border-color: var(--border); }
         .btn-icon.delete:hover { color: #E84040; }
-
-        .empty-state {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--text-muted);
-        }
+        .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
         .empty-state .icon { font-size: 2.8rem; margin-bottom: 0.5rem; }
-        .empty-state p { font-size: 0.95rem; }
-
-        /* ─── Footer ─── */
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            border-top: 1px solid var(--border);
-        }
+        .footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.75rem; border-top: 1px solid var(--border); }
         .footer a { color: var(--accent); text-decoration: none; }
-
-        /* ─── Responsive ─── */
         @media (max-width: 600px) {
-            .hero { padding: 2rem 1.2rem 1.4rem; }
-            .stats-row { padding: 0 1.2rem; }
-            .main { padding: 0 1.2rem; }
+            .hero { padding: 1.5rem 1.2rem 1rem; }
+            .login-bar { padding: 0.8rem 1.2rem 0; }
+            .stats-row, .main { padding: 0 1.2rem; }
             .form-section { padding: 1.2rem; }
             .run-card { padding: 0.9rem 1rem; }
             .filter-pills { display: none; }
@@ -337,13 +225,23 @@
     </style>
 </head>
 <body>
+    <div class="login-bar" id="loginBar">
+        <input type="text" id="usernameInput" placeholder="Tvoje přezdívka…" onkeydown="if(event.key==='Enter')login()">
+        <button onclick="login()">Přihlásit</button>
+    </div>
+    <div class="login-bar" id="userBar" style="display:none">
+        <span class="user-info">Přihlášen jako <strong id="displayName"></strong></span>
+        <button class="btn-logout" onclick="logout()">Odhlásit</button>
+    </div>
 
     <header class="hero">
         <div class="hero-inner">
             <h1>Run<span>Log</span></h1>
-            <p class="tagline">Tvůj osobní zápisník běhů · sleduj kilometry, tempo a pokrok</p>
+            <p class="tagline">Tvůj osobní zápisník běhů · data v Azure cloudu</p>
         </div>
     </header>
+
+    <div class="status-bar"><div class="status-msg" id="statusMsg"></div></div>
 
     <div class="stats-row">
         <div class="stat-card accent">
@@ -365,10 +263,9 @@
     </div>
 
     <main class="main">
-        <!-- Add run form -->
         <section class="form-section">
             <h2 class="form-title">➕ Přidat běh</h2>
-            <div class="form-grid" id="runForm">
+            <div class="form-grid">
                 <div class="field">
                     <label for="date">Datum</label>
                     <input type="date" id="date">
@@ -395,10 +292,9 @@
                     <textarea id="note" placeholder="Jak se ti běželo? Počasí, povrch…"></textarea>
                 </div>
             </div>
-            <button class="btn-add" onclick="addRun()">Uložit běh</button>
+            <button class="btn-add" id="btnAdd" onclick="addRun()">Uložit běh</button>
         </section>
 
-        <!-- Run list -->
         <div class="list-header">
             <h2 class="list-title">📋 Historie běhů</h2>
             <div class="filter-pills">
@@ -409,175 +305,168 @@
         </div>
         <div class="run-list" id="runList">
             <div class="empty-state">
-                <div class="icon">🏃</div>
-                <p>Zatím žádné běhy. Přidej svůj první!</p>
+                <div class="icon">🔑</div>
+                <p>Přihlaš se přezdívkou a začni zaznamenávat běhy.</p>
             </div>
         </div>
     </main>
 
     <footer class="footer">
-        RunLog &copy; 2026 · Postaveno pro běžce · <a href="https://github.com" target="_blank">GitHub</a>
+        RunLog &copy; 2026 · Azure Cosmos DB + Functions · <a href="https://github.com/bronismartin/runlog" target="_blank">GitHub</a>
     </footer>
 
 <script>
-    // ── Data layer (localStorage) ──
-    const STORAGE_KEY = 'runlog_runs';
+    const API = '/api/runs';
+    let currentUser = localStorage.getItem('runlog_user') || '';
+    let allRuns = [];
 
-    function getRuns() {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    function login() {
+        const name = document.getElementById('usernameInput').value.trim();
+        if (!name) return alert('Zadej přezdívku.');
+        currentUser = name.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+        localStorage.setItem('runlog_user', currentUser);
+        updateLoginUI();
+        loadRuns();
     }
-    function saveRuns(runs) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(runs));
+    function logout() {
+        currentUser = '';
+        allRuns = [];
+        localStorage.removeItem('runlog_user');
+        updateLoginUI();
+        render();
+    }
+    function updateLoginUI() {
+        document.getElementById('loginBar').style.display = currentUser ? 'none' : 'flex';
+        document.getElementById('userBar').style.display = currentUser ? 'flex' : 'none';
+        if (currentUser) document.getElementById('displayName').textContent = currentUser;
+    }
+    function showStatus(msg, isError = false) {
+        const el = document.getElementById('statusMsg');
+        el.textContent = msg;
+        el.className = 'status-msg visible' + (isError ? ' error' : '');
+        setTimeout(() => el.classList.remove('visible'), 3000);
     }
 
-    // ── Helpers ──
-    function parseDuration(str) {
-        const parts = str.split(':');
-        if (parts.length === 2) return parseInt(parts[0]) * 60 + parseInt(parts[1]);
-        if (parts.length === 1) return parseInt(parts[0]) * 60;
-        return 0;
+    async function loadRuns() {
+        if (!currentUser) return;
+        try {
+            showStatus('Načítám běhy…');
+            const res = await fetch(API, { headers: { 'x-user-id': currentUser } });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            allRuns = await res.json();
+            render();
+            showStatus('Načteno ' + allRuns.length + ' běhů');
+        } catch (err) {
+            showStatus('Chyba načítání: ' + err.message, true);
+        }
     }
-    function formatDuration(seconds) {
-        const m = Math.floor(seconds / 60);
-        const s = seconds % 60;
-        return `${m}:${String(s).padStart(2, '0')}`;
-    }
-    function calcPace(distKm, totalSec) {
-        if (!distKm || !totalSec) return '–';
-        const paceSeconds = totalSec / distKm;
-        return formatDuration(Math.round(paceSeconds));
-    }
-    function formatDate(dateStr) {
-        const d = new Date(dateStr + 'T00:00:00');
-        return d.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'short', year: 'numeric' });
-    }
-    const feelingEmoji = { great: '🔥', good: '👍', ok: '😐', tough: '😤' };
-
-    // ── Set default date to today ──
-    document.getElementById('date').valueAsDate = new Date();
-
-    // ── Add run ──
-    function addRun() {
+    async function addRun() {
+        if (!currentUser) return alert('Nejdřív se přihlaš.');
         const date = document.getElementById('date').value;
         const distance = parseFloat(document.getElementById('distance').value);
         const durationStr = document.getElementById('duration').value.trim();
         const feeling = document.getElementById('feeling').value;
         const note = document.getElementById('note').value.trim();
-
-        if (!date || !distance || !durationStr) {
-            alert('Vyplň prosím datum, vzdálenost a čas.');
-            return;
-        }
-
+        if (!date || !distance || !durationStr) return alert('Vyplň datum, vzdálenost a čas.');
         const totalSec = parseDuration(durationStr);
-        const run = {
-            id: Date.now(),
-            date,
-            distance,
-            totalSec,
-            feeling,
-            note
-        };
-
-        const runs = getRuns();
-        runs.unshift(run);
-        saveRuns(runs);
-
-        // Reset form
-        document.getElementById('distance').value = '';
-        document.getElementById('duration').value = '';
-        document.getElementById('note').value = '';
-        document.getElementById('date').valueAsDate = new Date();
-
-        render();
+        const btn = document.getElementById('btnAdd');
+        btn.disabled = true; btn.textContent = 'Ukládám…';
+        try {
+            const res = await fetch(API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'x-user-id': currentUser },
+                body: JSON.stringify({ date, distance, totalSec, feeling, note })
+            });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            document.getElementById('distance').value = '';
+            document.getElementById('duration').value = '';
+            document.getElementById('note').value = '';
+            document.getElementById('date').valueAsDate = new Date();
+            showStatus('Běh uložen!');
+            await loadRuns();
+        } catch (err) {
+            showStatus('Chyba ukládání: ' + err.message, true);
+        } finally {
+            btn.disabled = false; btn.textContent = 'Uložit běh';
+        }
     }
-
-    // ── Delete run ──
-    function deleteRun(id) {
+    async function deleteRun(id) {
         if (!confirm('Smazat tento běh?')) return;
-        const runs = getRuns().filter(r => r.id !== id);
-        saveRuns(runs);
-        render();
+        try {
+            await fetch(API + '/' + id, { method: 'DELETE', headers: { 'x-user-id': currentUser } });
+            showStatus('Běh smazán');
+            await loadRuns();
+        } catch (err) {
+            showStatus('Chyba mazání: ' + err.message, true);
+        }
     }
 
-    // ── Filter ──
-    let currentFilter = 'all';
-    document.querySelectorAll('.pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-            document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
-            currentFilter = pill.dataset.filter;
-            render();
-        });
-    });
+    function parseDuration(str) {
+        const p = str.split(':');
+        return p.length === 2 ? parseInt(p[0]) * 60 + parseInt(p[1]) : parseInt(p[0]) * 60;
+    }
+    function formatDuration(sec) {
+        return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0');
+    }
+    function calcPace(km, sec) {
+        return (!km || !sec) ? '–' : formatDuration(Math.round(sec / km));
+    }
+    function formatDate(d) {
+        return new Date(d + 'T00:00:00').toLocaleDateString('cs-CZ', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+    const emoji = { great: '🔥', good: '👍', ok: '😐', tough: '😤' };
 
+    let currentFilter = 'all';
+    document.querySelectorAll('.pill').forEach(p => p.addEventListener('click', () => {
+        document.querySelectorAll('.pill').forEach(x => x.classList.remove('active'));
+        p.classList.add('active');
+        currentFilter = p.dataset.filter;
+        render();
+    }));
     function filterRuns(runs) {
         const now = new Date();
         if (currentFilter === 'week') {
-            const weekAgo = new Date(now);
-            weekAgo.setDate(weekAgo.getDate() - 7);
-            return runs.filter(r => new Date(r.date) >= weekAgo);
+            const w = new Date(now); w.setDate(w.getDate() - 7);
+            return runs.filter(r => new Date(r.date) >= w);
         }
-        if (currentFilter === 'month') {
-            return runs.filter(r => {
-                const d = new Date(r.date);
-                return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
-            });
-        }
+        if (currentFilter === 'month') return runs.filter(r => { const d = new Date(r.date); return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear(); });
         return runs;
     }
 
-    // ── Render ──
     function render() {
-        const allRuns = getRuns();
         const runs = filterRuns(allRuns);
-
-        // Stats (always based on all runs)
         const totalKm = allRuns.reduce((s, r) => s + r.distance, 0);
         const totalSec = allRuns.reduce((s, r) => s + r.totalSec, 0);
         const now = new Date();
-        const monthRuns = allRuns.filter(r => {
-            const d = new Date(r.date);
-            return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
-        });
-        const monthKm = monthRuns.reduce((s, r) => s + r.distance, 0);
+        const monthKm = allRuns.filter(r => { const d = new Date(r.date); return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear(); }).reduce((s, r) => s + r.distance, 0);
 
-        document.getElementById('totalKm').innerHTML = `${totalKm.toFixed(1)} <span class="unit">km</span>`;
+        document.getElementById('totalKm').innerHTML = totalKm.toFixed(1) + ' <span class="unit">km</span>';
         document.getElementById('totalRuns').textContent = allRuns.length;
-        document.getElementById('avgPace').innerHTML = allRuns.length
-            ? `${calcPace(totalKm, totalSec)} <span class="unit">min/km</span>`
-            : `– <span class="unit">min/km</span>`;
-        document.getElementById('monthKm').innerHTML = `${monthKm.toFixed(1)} <span class="unit">km</span>`;
+        document.getElementById('avgPace').innerHTML = allRuns.length ? calcPace(totalKm, totalSec) + ' <span class="unit">min/km</span>' : '– <span class="unit">min/km</span>';
+        document.getElementById('monthKm').innerHTML = monthKm.toFixed(1) + ' <span class="unit">km</span>';
 
-        // List
         const list = document.getElementById('runList');
-        if (!runs.length) {
-            list.innerHTML = `
-                <div class="empty-state">
-                    <div class="icon">🏃</div>
-                    <p>${currentFilter === 'all' ? 'Zatím žádné běhy. Přidej svůj první!' : 'V tomto období žádné běhy.'}</p>
-                </div>`;
-            return;
-        }
+        if (!currentUser) { list.innerHTML = '<div class="empty-state"><div class="icon">🔑</div><p>Přihlaš se přezdívkou a začni zaznamenávat běhy.</p></div>'; return; }
+        if (!runs.length) { list.innerHTML = '<div class="empty-state"><div class="icon">🏃</div><p>' + (currentFilter === 'all' ? 'Zatím žádné běhy. Přidej svůj první!' : 'V tomto období žádné běhy.') + '</p></div>'; return; }
 
-        list.innerHTML = runs.map((r, i) => `
-            <div class="run-card" style="animation-delay:${i * 0.05}s">
-                <div class="run-meta">
-                    <span class="run-date">${formatDate(r.date)}</span>
-                    <span class="run-distance">${r.distance.toFixed(1)} <span class="km">km</span></span>
-                    <span class="run-time">⏱ ${formatDuration(r.totalSec)}</span>
-                    <span class="run-pace">${calcPace(r.distance, r.totalSec)} /km</span>
-                    <span>${feelingEmoji[r.feeling] || ''}</span>
-                </div>
-                <div class="run-actions">
-                    <button class="btn-icon delete" onclick="deleteRun(${r.id})" title="Smazat">✕</button>
-                </div>
-                ${r.note ? `<div class="run-note">"${r.note}"</div>` : ''}
-            </div>
-        `).join('');
+        list.innerHTML = runs.map((r, i) =>
+            '<div class="run-card" style="animation-delay:' + (i * 0.05) + 's">' +
+            '<div class="run-meta">' +
+            '<span class="run-date">' + formatDate(r.date) + '</span>' +
+            '<span class="run-distance">' + r.distance.toFixed(1) + ' <span class="km">km</span></span>' +
+            '<span class="run-time">⏱ ' + formatDuration(r.totalSec) + '</span>' +
+            '<span class="run-pace">' + calcPace(r.distance, r.totalSec) + ' /km</span>' +
+            '<span>' + (emoji[r.feeling] || '') + '</span>' +
+            '</div>' +
+            '<div class="run-actions"><button class="btn-icon delete" onclick="deleteRun(\'' + r.id + '\')" title="Smazat">✕</button></div>' +
+            (r.note ? '<div class="run-note">"' + r.note + '"</div>' : '') +
+            '</div>'
+        ).join('');
     }
 
-    render();
+    document.getElementById('date').valueAsDate = new Date();
+    updateLoginUI();
+    if (currentUser) loadRuns(); else render();
 </script>
 </body>
 </html>
